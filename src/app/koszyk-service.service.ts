@@ -1,13 +1,27 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Produkt } from './produkt';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class KoszykServiceService {
-  @Output() zaktualizowanyKoszyk = new EventEmitter<boolean>();
+  private subscribers: Array<Observer<boolean>> = new Array<Observer<boolean>>();
+  private subscriptionObservable: Observable<boolean>;
   koszyk: Array<KoszykEntry> = new Array();
 
-  constructor() { }
+  constructor() {
+    this.subscriptionObservable = new Observable<boolean>((observer: Observer<boolean>) => {
+      this.subscribers.push(observer);
+      observer.next(true);
+      return () => {
+        this.subscribers = this.subscribers.filter((obs) => obs !== observer);
+      };
+    });
+  }
 
+  get() {
+    return this.subscriptionObservable;
+  }
 
   dodajDoKoszyka(produkt: Produkt) {
     let wpis = this.koszyk.find(s => s.zamowionyProdukt.getId() === produkt.getId());
@@ -16,15 +30,24 @@ export class KoszykServiceService {
       wpis.id = produkt.id;
       this.koszyk.push(wpis);
     }
-    console.log('Cokolwiek');
     wpis.zwiekszIlosc();
-    this.zaktualizowanyKoszyk.emit(true);
-    console.log('Emitted');
+    this.powiadom(true);
+  }
+
+  private powiadom(cart: boolean): void {
+    console.log('Size: ' + this.subscribers.length);
+    this.subscribers
+      .forEach((sub) => {
+        try {
+          sub.next(cart);
+        } catch (e) {
+        }
+      });
   }
 
 }
 
-class KoszykEntry {
+export class KoszykEntry {
   zamowionyProdukt: Produkt;
   id = 0;
   ilosc = 0;
@@ -36,7 +59,6 @@ class KoszykEntry {
 
   zwiekszIlosc() {
     this.ilosc++;
-    console.log('Obecna ilosc: ' + this.ilosc);
   }
 
   zmniejszIlosc() {

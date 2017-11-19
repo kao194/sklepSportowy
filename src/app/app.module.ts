@@ -7,13 +7,15 @@ import { ProduktComponent } from './produkt/produkt.component';
 import { ProductProviderService } from './product-provider.service';
 import { KoszykComponent } from './koszyk/koszyk.component';
 import { KoszykServiceService } from './koszyk-service.service';
+import { WidokKoszykaComponent } from './widok-koszyka/widok-koszyka.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProduktyComponent,
     ProduktComponent,
-    KoszykComponent
+    KoszykComponent,
+    WidokKoszykaComponent
   ],
   imports: [
     BrowserModule

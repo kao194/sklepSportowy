@@ -16,6 +16,5 @@ export class ProduktComponent implements OnInit {
 
   zamowTowar(produkt: Produkt) {
     this.koszykService.dodajDoKoszyka(produkt);
-    console.log(produkt);
   }
 }
