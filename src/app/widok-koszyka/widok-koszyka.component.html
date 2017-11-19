@@ -1,2 +1,7 @@
 Widok podsumowania koszyka
-<a routerLink="/" routerLinkActive="active">kontynuuj zakupy</a>
+<br />
+<div *ngFor="let item of localKoszyk">Kupiono: {{item.getProduktName()}} w ilości {{item.getIlosc()}} warte: {{item.getWartoscWpisu()}}</div>
+Wartość koszyka: {{wartoscKoszyka}}
+<!-- <a routerLink="/" routerLinkActive="active" skipLocationChange>kontynuuj zakupy</a> albo -->
+<a routerLink="/" routerLinkActive="active">kontynuuj zakupy</a> albo
+<a routerLink="/podsumowanie" routerLinkActive="active">przejdź do podsumowania</a>

@@ -19,4 +19,8 @@ export class Produkt {
     getId() {
         return this.id;
     }
+
+    getCena() {
+        return this.cena;
+    }
 }

@@ -9,6 +9,7 @@ import { KoszykComponent } from './koszyk/koszyk.component';
 import { KoszykServiceService } from './koszyk-service.service';
 import { WidokKoszykaComponent } from './widok-koszyka/widok-koszyka.component';
 import { AppRoutingModule } from './app.routing';
+import { PodsumowanieComponent } from './podsumowanie/podsumowanie.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app.routing';
     ProduktyComponent,
     ProduktComponent,
     KoszykComponent,
-    WidokKoszykaComponent
+    WidokKoszykaComponent,
+    PodsumowanieComponent
   ],
   imports: [
     BrowserModule,

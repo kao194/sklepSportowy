@@ -34,6 +34,14 @@ export class KoszykServiceService {
     this.powiadom(true);
   }
 
+  obliczWartoscKoszyka() {
+    let suma = 0;
+    this.koszyk.forEach(element => {
+      suma += element.getWartoscWpisu();
+    });
+    return suma;
+  }
+
   private powiadom(cart: boolean): void {
     console.log('Size: ' + this.subscribers.length);
     this.subscribers
@@ -55,6 +63,22 @@ export class KoszykEntry {
   constructor(nowyProdukt: Produkt) {
     this.zamowionyProdukt = nowyProdukt;
     this.id = nowyProdukt.getId();
+  }
+
+  getIlosc() {
+    return this.ilosc;
+  }
+
+  getProduktName() {
+    return this.zamowionyProdukt.getNazwa();
+  }
+
+  getProduktCena() {
+    return this.zamowionyProdukt.getCena();
+  }
+
+  getWartoscWpisu() {
+    return this.getProduktCena() * this.getIlosc();
   }
 
   zwiekszIlosc() {
