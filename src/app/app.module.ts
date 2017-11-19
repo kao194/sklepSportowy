@@ -8,6 +8,7 @@ import { ProductProviderService } from './product-provider.service';
 import { KoszykComponent } from './koszyk/koszyk.component';
 import { KoszykServiceService } from './koszyk-service.service';
 import { WidokKoszykaComponent } from './widok-koszyka/widok-koszyka.component';
+import { AppRoutingModule } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WidokKoszykaComponent } from './widok-koszyka/widok-koszyka.component';
     WidokKoszykaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [ProductProviderService, KoszykServiceService],
   bootstrap: [AppComponent]
