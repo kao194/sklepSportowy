@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Produkt } from '../produkt';
+import { KoszykServiceService } from '../koszyk-service.service';
 
 @Component({
   selector: 'app-produkt',
@@ -8,9 +9,13 @@ import { Produkt } from '../produkt';
 })
 export class ProduktComponent implements OnInit {
   @Input() produkt: Produkt;
-  constructor() { }
+  constructor(private koszykService: KoszykServiceService) { }
 
   ngOnInit() {
   }
 
+  zamowTowar(produkt: Produkt) {
+    this.koszykService.dodajDoKoszyka(produkt);
+    console.log(produkt);
+  }
 }

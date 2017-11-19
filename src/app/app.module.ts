@@ -5,17 +5,20 @@ import { AppComponent } from './app.component';
 import { ProduktyComponent } from './produkty/produkty.component';
 import { ProduktComponent } from './produkt/produkt.component';
 import { ProductProviderService } from './product-provider.service';
+import { KoszykComponent } from './koszyk/koszyk.component';
+import { KoszykServiceService } from './koszyk-service.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProduktyComponent,
-    ProduktComponent
+    ProduktComponent,
+    KoszykComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [ProductProviderService],
+  providers: [ProductProviderService, KoszykServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

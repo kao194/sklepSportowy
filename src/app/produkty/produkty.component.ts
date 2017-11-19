@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductProviderService } from '../product-provider.service';
 import { Produkt } from '../produkt';
 import { ProduktComponent } from '../produkt/produkt.component';
+import { KoszykServiceService } from '../koszyk-service.service';
 
 @Component({
   selector: 'app-produkty',
@@ -10,11 +11,13 @@ import { ProduktComponent } from '../produkt/produkt.component';
 })
 export class ProduktyComponent implements OnInit {
   service: ProductProviderService;
+  koszykService: KoszykServiceService;
   listaProduktow: Array<Produkt> = [];
   zbiorKategorii: Set<String> = new Set<String>();
 
-  constructor(service: ProductProviderService) {
+  constructor(service: ProductProviderService, koszykService: KoszykServiceService) {
     this.service = service;
+    this.koszykService = koszykService;
   }
 
   ngOnInit() {

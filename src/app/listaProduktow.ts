@@ -11,19 +11,19 @@ export const LISTA_PRODUKTOW = [
         'kategoria': 'sportowe'
     },
     {
-        'nazwa': 'nazwaTowaru',
+        'nazwa': 'Towar1',
         'opis': 'opisTowaru',
         'cena': '23.33',
         'kategoria': 'uzytkowe'
     },
     {
-        'nazwa': 'nazwaTowaru',
+        'nazwa': 'towar3',
         'opis': 'opisTowaru',
         'cena': '23.33',
         'kategoria': 'sportowe'
     },
     {
-        'nazwa': 'nazwaTowaru',
+        'nazwa': 'towar5',
         'opis': 'opisTowaru',
         'cena': '23.33',
         'kategoria': 'sportowe'
