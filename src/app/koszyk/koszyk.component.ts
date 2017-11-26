@@ -20,8 +20,8 @@ export class KoszykComponent implements OnInit, OnDestroy {
   }
 
   updateKoszyka() {
-    console.log(this.koszykService.koszyk);
-    this.localKoszyk = this.koszykService.koszyk;
+    // console.log(this.koszykService.getKoszyk());
+    this.localKoszyk = this.koszykService.getKoszyk();
   }
 
 

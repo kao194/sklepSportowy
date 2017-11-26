@@ -21,7 +21,7 @@ export class WidokKoszykaComponent implements OnInit, OnDestroy {
   }
 
   updateKoszyka() {
-    this.localKoszyk = this.koszykService.koszyk;
+    this.localKoszyk = this.koszykService.getKoszyk();
     this.wartoscKoszyka = this.koszykService.obliczWartoscKoszyka();
   }
 

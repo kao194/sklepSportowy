@@ -1,12 +1,7 @@
 export class Produkt {
-    static counter = 0;
-    id: number;
 
-    constructor(private nazwa: String, private opis: String,
-        private cena: number, private kategoria: String) {
-            this.id = Produkt.counter;
-            Produkt.counter++;
-    }
+    constructor(private id, private nazwa: String, private opis: String,
+        private cena: number, private kategoria: String) { }
 
     getNazwa(): String {
         return this.nazwa;
