@@ -21,8 +21,11 @@ export class ProduktyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.aktualizujProdukty();
+  }
+
+  aktualizujProdukty() {
     this.listaProduktow = this.service.getListaProduktow();
     this.listaProduktow.forEach(s => this.zbiorKategorii.add(s.getKategoria()));
   }
-
 }

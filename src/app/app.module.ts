@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Import HttpClientModule from @angular/common/http
+import {HttpClientModule} from '@angular/common/http';
+// documentation says only the above is needed...
+import { HttpClient } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { ProduktyComponent } from './produkty/produkty.component';
 import { ProduktComponent } from './produkt/produkt.component';
@@ -22,7 +27,8 @@ import { PodsumowanieComponent } from './podsumowanie/podsumowanie.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [ProductProviderService, KoszykServiceService],
   bootstrap: [AppComponent]
