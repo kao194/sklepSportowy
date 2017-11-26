@@ -3,6 +3,7 @@ import { ProductProviderService } from '../product-provider.service';
 import { Produkt } from '../produkt';
 import { ProduktComponent } from '../produkt/produkt.component';
 import { KoszykServiceService } from '../koszyk-service.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-produkty',
@@ -14,6 +15,7 @@ export class ProduktyComponent implements OnInit {
   koszykService: KoszykServiceService;
   listaProduktow: Array<Produkt> = [];
   zbiorKategorii: Set<String> = new Set<String>();
+  private produktSub: Subscription;
 
   constructor(service: ProductProviderService, koszykService: KoszykServiceService) {
     this.service = service;
@@ -21,10 +23,13 @@ export class ProduktyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aktualizujProdukty();
+    this.produktSub = this.service.getSubscription().subscribe((cart) => {
+      this.aktualizujProdukty();
+    });
   }
 
   aktualizujProdukty() {
+    console.log('Called zaktualizujProdukty');
     this.listaProduktow = this.service.getListaProduktow();
     this.listaProduktow.forEach(s => this.zbiorKategorii.add(s.getKategoria()));
   }
