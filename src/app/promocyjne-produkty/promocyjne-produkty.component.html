@@ -1,0 +1,38 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-brand">Sklep sportowy - promocje</div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <app-promocje-komponent></app-promocje-komponent>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+          <label (click)="powrotDoSklepu()">Powrót</label>
+        </ul>
+      <app-koszyk class="form-inline my-2 my-lg-0"></app-koszyk>
+    </div>
+  </nav>
+  
+  <div class="container lowered">
+    <div class="row">
+      <div class="col-lg-3">
+  
+        Kategorie:
+        <div class="btn-group-vertical" data-toggle="buttons">
+          <label class="btn btn-outline-primary" *ngFor='let item of zbiorKategorii'>
+            <input type="checkbox" autocomplete="off" (click)='filterCategory($event, item)'>{{item}}
+          </label>
+        </div>
+        <div>Obecne zastosowane filtry: <ul class="list-group"><li class ="list-group-item" *ngFor='let item of filteredCategories'>{{item}}</li></ul></div>
+  
+      </div>
+      <div class="col-ls-9">
+        <app-produkt *ngFor='let item of listaProduktow | filter:{set: this.filteredCategories} | paginate: { itemsPerPage: 3, currentPage: p }'
+          [produkt]="item"></app-produkt>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>

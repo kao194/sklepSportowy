@@ -6,22 +6,22 @@ import { KoszykServiceService } from '../koszyk-service.service';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from '../pipes';
+import { PromocjeServiceService } from '../promocje-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-produkty',
-  templateUrl: './produkty.component.html',
-  styleUrls: ['./produkty.component.css']
+  selector: 'app-promocyjne-produkty',
+  templateUrl: './promocyjne-produkty.component.html',
+  styleUrls: ['./promocyjne-produkty.component.css']
 })
-export class ProduktyComponent implements OnInit {
-  service: ProductProviderService;
-  koszykService: KoszykServiceService;
+export class PromocyjneProduktyComponent implements OnInit {
   listaProduktow: Array<Produkt> = [];
   zbiorKategorii: Set<String> = new Set<String>();
   private produktSub: Subscription;
 
   filteredCategories: Set<String> = new Set();
 
-  constructor(service: ProductProviderService, koszykService: KoszykServiceService) {
+  constructor(private service: PromocjeServiceService, private koszykService: KoszykServiceService, private router: Router) {
     this.service = service;
     this.koszykService = koszykService;
   }
@@ -32,9 +32,13 @@ export class ProduktyComponent implements OnInit {
     });
   }
 
+  powrotDoSklepu() {
+    this.router.navigate(['/']);
+  }
+
   aktualizujProdukty() {
     console.log('Called zaktualizujProdukty');
-    this.listaProduktow = this.service.getListaProduktow();
+    this.listaProduktow = this.service.pobierzPromocje();
     this.listaProduktow.forEach(s => this.zbiorKategorii.add(s.getKategoria()));
   }
 

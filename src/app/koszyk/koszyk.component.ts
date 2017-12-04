@@ -24,7 +24,9 @@ export class KoszykComponent implements OnInit, OnDestroy {
     this.localKoszyk = this.koszykService.getKoszyk();
   }
 
-
+  getWartoscKoszyka() {
+    return this.koszykService.obliczWartoscKoszyka();
+  }
 
   ngOnDestroy(): void {
     if (this.cartSubscription) {

@@ -7,6 +7,7 @@ import { AdminPanelComponentComponent } from './admin-panel-component/admin-pane
 import { AdminLoginComponentComponent } from './admin-login-component/admin-login-component.component';
 import { RegisterComponentComponent } from './register-component/register-component.component';
 import { AuthGuard } from './auth-guard';
+import { PromocyjneProduktyComponent } from './promocyjne-produkty/promocyjne-produkty.component';
 
 const appRoutes = [
     {
@@ -25,6 +26,10 @@ const appRoutes = [
     {
         component: WidokKoszykaComponent,
         path: 'koszyk'
+    },
+    {
+        component: PromocyjneProduktyComponent,
+        path: 'promocje'
     },
     {
         component: PodsumowanieComponent,

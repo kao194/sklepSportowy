@@ -1,2 +1,74 @@
 AdminPanel works! :
 <button (click)='logout()'>Wyloguj się</button>
+
+<div class='container'>
+  <header>Zamowienia do zaakceptowania</header>
+  <table class="table table-responsive-sm">
+    <thead>
+      <tr>
+        <th scope="col">Imie</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Email</th>
+        <th scope="col">Adres</th>
+        <th scope="col">Koszyk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getZamowienia()">
+        <td>{{item.imie}}</td>
+        <td>{{item.nazwisko}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.adres}}</td>
+        <td>{{item.koszyk}}</td>
+        <button type="button" class="btn btn-success" (click)='zaakceptuj(item._id)'>Zaakceptuj</button>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class='container'>
+  <header>Promocyjne produkty:</header>
+  <table class="table table-responsive-sm">
+    <thead>
+      <tr>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Opis</th>
+        <th scope="col">Kategoria</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Zadanie</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getPromocje()">
+        <td>{{item.nazwa}}</td>
+        <td>{{item.opis}}</td>
+        <td>{{item.kategoria}}</td>
+        <td>{{item.cena}}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)='zakonczPromocje(item.id)'>Zakończ</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="row">
+      <div class="col">
+        <input type="input" class="form-control" ngModel required name="nazwa">
+      </div>
+      <div class="col">
+        <input type="input" class="form-control" ngModel required name="opis">
+      </div>
+      <div class="col">
+        <input type="input" class="form-control" ngModel required name="kategoria">
+      </div>
+      <div class="col">
+        <input type="number" class="form-control" ngModel required step="0.01" min="0.00" name="cena">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-success">Dodaj</button>
+      </div>
+    </div>
+  </form>
+</div>

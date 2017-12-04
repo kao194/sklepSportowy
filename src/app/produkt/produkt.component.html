@@ -1,4 +1,14 @@
-<p>
-  produkt works! {{produkt.getNazwa()}}
-  <button (click)="zamowTowar(produkt)">Dodaj do koszyka</button>
-</p>
+<div class="container-fluid">
+  <div class="card" style="width: 40rem;">
+    <div class="row">
+        <div class="col-md-4">
+          <img class="card-img-top" [src]="produkt.getZdjecie()" alt="Card image cap">
+        </div>
+        <div class="col-md-6">
+          <h4 class="card-title">{{produkt.getNazwa()}}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{produkt.getCena() | currency:'EUR':true:'1.2'}}</h6>
+          <a class="btn btn-primary" (click)="zamowTowar(produkt)">Dodaj do koszyka</a>
+        </div>
+      </div>
+  </div>
+</div>

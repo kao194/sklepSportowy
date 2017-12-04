@@ -3,7 +3,11 @@ import { Produkt } from './produkt';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { ProductProviderService } from './product-provider.service';
+import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Zamowienie } from './zamowienie';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ZamowieniaServiceService } from './zamowienia-service.service';
 
 @Injectable()
 export class KoszykServiceService {
@@ -11,7 +15,8 @@ export class KoszykServiceService {
   private subscriptionObservable: Observable<boolean>;
   private koszyk: Array<KoszykEntry> = new Array();
 
-  constructor(private productProviderService: ProductProviderService) {
+  constructor(private productProviderService: ProductProviderService, private http: HttpClient, private router: Router,
+    private zamowieniaService: ZamowieniaServiceService) {
     this.subscriptionObservable = new Observable<boolean>((observer: Observer<boolean>) => {
       this.subscribers.push(observer);
       observer.next(true);
@@ -20,21 +25,6 @@ export class KoszykServiceService {
       };
     });
   }
-
-  // fromLocalStorage() {
-  //   console.log('ngOnInit serwisu');
-
-  //   // this.koszyk = JSON.parse(localStorage.getItem('Koszyk'))
-  //   //   .map(s => new KoszykEntry(this.productProviderService.getProduktById(s.zamowionyProdukt.id), s.ilosc));
-  //   console.log(localStorage.getItem('Koszyk'));
-  //   if (localStorage.getItem('Koszyk') !== null) {
-  //     JSON.parse(localStorage.getItem('Koszyk'))
-  //       .forEach(s => console.log(this.productProviderService.getProduktById(s.zamowionyProdukt.id), s.ilosc));
-  //   } else {
-  //     console.log('Pusty koszyk');
-  //   }
-  // }
-
 
   getKoszyk(): Array<KoszykEntry> {
     // this.fromLocalStorage();
@@ -45,6 +35,11 @@ export class KoszykServiceService {
     return this.subscriptionObservable;
   }
 
+  wyczyscKoszyk() {
+    this.koszyk = new Array();
+    this.powiadom(true);
+  }
+
   dodajDoKoszyka(produkt: Produkt) {
     let wpis = this.koszyk.find(s => s.zamowionyProdukt.getId() === produkt.getId());
     if (wpis === undefined) {
@@ -53,8 +48,22 @@ export class KoszykServiceService {
       this.koszyk.push(wpis);
     }
     wpis.zwiekszIlosc();
-    // localStorage.setItem('Koszyk', JSON.stringify(this.koszyk));
-    // this.fromLocalStorage();
+    this.powiadom(true);
+  }
+
+  zwiekszIloscWpisu(entry: KoszykEntry) {
+    entry.zwiekszIlosc();
+    this.powiadom(true);
+  }
+
+  zmniejszIloscWpisu(entry: KoszykEntry) {
+    entry.zmniejszIlosc();
+    if (entry.getIlosc() === 0) {
+      const index = this.koszyk.indexOf(entry, 0);
+      if (index > -1) {
+        this.koszyk.splice(index, 1);
+      }
+    }
     this.powiadom(true);
   }
 
@@ -77,6 +86,12 @@ export class KoszykServiceService {
       });
   }
 
+  zapiszZamowienie(zamowienie: Zamowienie) {
+    this.zamowieniaService.zapiszZamowienie(zamowienie);
+
+    this.wyczyscKoszyk();
+    this.router.navigate(['/']);
+  }
 }
 
 export class KoszykEntry {

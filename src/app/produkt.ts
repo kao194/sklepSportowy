@@ -18,4 +18,8 @@ export class Produkt {
     getCena() {
         return this.cena;
     }
+
+    getZdjecie() {
+        return 'https://supersportowy.pl/3390-thickbox_default/rower-dzieciecy-maxim-46-fioletowy.jpg';
+    }
 }

@@ -1,7 +1,37 @@
-Widok podsumowania koszyka
-<br />
-<div *ngFor="let item of localKoszyk">Kupiono: {{item.getProduktName()}} w ilości {{item.getIlosc()}} warte: {{item.getWartoscWpisu()}}</div>
-Wartość koszyka: {{wartoscKoszyka}}
-<!-- <a routerLink="/" routerLinkActive="active" skipLocationChange>kontynuuj zakupy</a> albo -->
-<a routerLink="/" routerLinkActive="active">kontynuuj zakupy</a> albo
-<a routerLink="/podsumowanie" routerLinkActive="active">przejdź do podsumowania</a>
+<div class='container'>
+    <header>Koszyk</header>
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa towaru</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Cena produktu</th>
+                <th scope="col">Cena całości</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of localKoszyk">
+                <td>{{item.getProduktName()}}</td>
+                <td>
+                    <div class="btn-group mr-2 centered" role="group" aria-label="Zamowienia control group">
+                        <button type="button" class="btn btn-danger btn-sm" (click)="zmniejszIlosc(item)" [disabled]="item.getIlosc()===0">-</button>
+                        <button type="button" class="btn btn-secondary">{{item.getIlosc()}}</button>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="zwiekszIlosc(item)">+</button>
+                    </div>
+                </td>
+                <td>{{item.getProduktCena() | currency:'EUR':true:'1.2'}}</td>
+                <td>{{item.getWartoscWpisu() | currency:'EUR':true:'1.2'}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Razem</th>
+                <td></td>
+                <td></td>
+                <th>{{wartoscKoszyka | currency:'EUR':true:'1.2'}}</th>
+            </tr>
+        </tbody>
+    </table>
+    <div class='container'>
+        <button type="button" class="btn btn-success" (click)='kontynuuj()'>Kontynuuj zakupy</button>
+        <button type="button" class="btn btn-success" (click)='podsumuj()'>Przejdź do podsumowania</button>
+    </div>
+</div>
